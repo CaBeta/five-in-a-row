@@ -60,8 +60,9 @@ function addChessman(x,y) {
 			gridBlack[x][y] = 1;
 		}
 		drawChessman(x * 30 + MARGIN,y * 30 + MARGIN,turn);
-		changeTurn();
+		
 		toWin(x,y);
+		changeTurn();
 
 	}
 }
@@ -119,7 +120,7 @@ function searchLine (x,y,grid) {
 		detect(x,y,grid,SEARCH[i]);
 		r_detect(x,y,grid,SEARCH[i]);
 		var sum = f_sum+b_sum+1
-	//	console.log("sum:",sum);
+		// console.log("sum:",sum);
 		if (sum == 5) {
 			win = 1;
 			return;
