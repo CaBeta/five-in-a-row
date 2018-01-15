@@ -1,20 +1,20 @@
 var c = document.getElementById("chessborad");
 
-var EDGE = 14*30;//棋盘边长
-var MARGIN = 15;//棋盘边缘间隙
-var turn = "black";//轮到黑棋或白棋
-var win = 0;//是否胜利信息
-var gridBlack = new Array(15);//黑棋网格
-var gridWhite = new Array(15);//白棋网格
+var EDGE = 14*30; // 棋盘边长
+var MARGIN = 15; // 棋盘边缘间隙
+var turn = "black"; // 轮到黑棋或白棋
+var win = 0; // 是否胜利信息
+var gridBlack = new Array(15); // 黑棋网格
+var gridWhite = new Array(15); // 白棋网格
 for (var i = 0; i < gridWhite.length; i++) {
 	gridWhite[i] = new Array(15);
 	gridBlack[i] = new Array(15);
 };
 
-//定义八个搜索方向
+// 定义八个搜索方向
 var SEARCH = [[-1,-1],[0,-1],[1,-1],[1,0],[1,1],[0,1],[-1,1],[-1,0]];
 
-//初始化棋盘
+// 初始化棋盘
 function initChessborad() {
 	var borad = c.getContext("2d");
 	borad.fillStyle = "#ffc369";
@@ -36,7 +36,7 @@ function initChessborad() {
 function drawChessman(x,y,color) {
 	var gradient = c.getContext("2d");
 	gradient.beginPath();
-	gradient.arc(x,y,14,0,2*Math.PI);//x,y,r,起始，结束
+	gradient.arc(x,y,13.5,0,2*Math.PI);//x,y,r,起始，结束
 	if (color == "white") {
 		var my_gradient=gradient.createLinearGradient(x-6,y-6,x+60,y+60);
 		my_gradient.addColorStop(0,"white");
@@ -85,7 +85,7 @@ function clearCanvas()
 
 //打印底部信息
 function showMessage(msg) {
-	var show = document.getElementById('bottom');
+	var show = document.getElementsByClassName('bottom')[0];
 	show.innerHTML = "" + msg;
 }
 
@@ -190,7 +190,13 @@ c.onclick = function(e) {
 	var width = document.body.clientWidth;
 	//console.log(x + "," + y);
 	var xInborad = x-(width - EDGE - 30)/2-1;
-	var yInborad = y-43;
+	var yInborad = y-53;
 	checkMove(xInborad,yInborad);
 
 }
+// 用户登录 等待对手
+// 有第二个用户登录 游戏开始
+// 确定先行 
+// 玩家点击 检查落子 发送落子信息 检查胜负
+// 显示棋子 交换出手 -> 回到上一步
+// 得到胜负游戏结束

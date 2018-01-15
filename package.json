@@ -1,0 +1,9 @@
+{
+  "name": "five-in-a-row",
+  "version": "2.0.1",
+  "description": "five-in-a-row game by socket.io",
+  "dependencies": {
+    "express": "^4.15.2",
+    "socket.io": "^2.0.4"
+  }
+}
