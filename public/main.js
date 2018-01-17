@@ -38,6 +38,7 @@ $(function () {
     var MARGIN = 15; // 棋盘边缘间隙
     var turn = "black"; // 轮到黑棋或白棋
     var playerColor = "black";
+    var BEGIN = 0;
     var win = 0; // 是否胜利信息
     var gridBlack = new Array(15); // 黑棋网格
     var gridWhite = new Array(15); // 白棋网格
@@ -98,7 +99,6 @@ $(function () {
 
             toWin(x, y);
             changeTurn();
-            
         }
     }
 
@@ -106,7 +106,7 @@ $(function () {
     function changeTurn() {
         if (turn == "white") {
             turn = "black";
-        } else {
+        } else if (turn == "black") {
             turn = "white";
         }
     }
@@ -126,7 +126,10 @@ $(function () {
     function checkMove(x, y) {
         var x_error = (x - MARGIN) % 30;
         var y_error = (y - MARGIN) % 30;
-        if (turn == playerColor && (x_error < 8 || x_error > 22) && (y_error < 8 || y_error > 22) && win == 0) {
+        if ( turn == playerColor &&
+             (x_error < 8 || x_error > 22) && 
+             (y_error < 8 || y_error > 22) && 
+             win == 0 && BEGIN == 1) {
             // TODO:这里不知道发生了什么 可能不需要Math.round()
             if (x_error < 8) {
                 x = Math.round((x - x_error) / 30) - 1;
@@ -452,6 +455,7 @@ $(function () {
         if (data.numUsers == 2) {
             initChessborad();
             playerColor = "white";
+            BEGIN = 1;
         }
     });
 
@@ -465,6 +469,7 @@ $(function () {
         console.log(data.username + ' joined');
         if (data.numUsers == 2) {
             initChessborad();
+            BEGIN = 1;
         }
     });
     socket.on('add and draw chessman',function(data){
